@@ -1,0 +1,37 @@
+[project]
+name = "llm-dev-env-automator"
+version = "0.1.0"
+description = "LLM-Orchestrated Dev Environment Automation CLI"
+authors = [
+    { name = "Pari", email = "pari@example.com" }
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1.7",
+    "rich>=13.7.1",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.1",
+    "litellm>=1.35.0",
+    "instructor>=1.2.6",
+    "structlog>=24.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.1.1",
+    "pytest-asyncio>=0.23.6",
+    "ruff>=0.3.5",
+    "black>=24.3.0",
+]
+
+[project.scripts]
+dev-env = "src.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
