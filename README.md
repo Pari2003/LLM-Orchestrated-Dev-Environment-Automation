@@ -10,8 +10,8 @@ An intelligent CLI tool that generates complete, production-ready, and container
 Instead of manually writing `docker-compose.yml`, `Dockerfile`, and `.devcontainer/devcontainer.json` files or prompting an LLM file-by-file, this tool:
 1. **Plans the architecture** based on your prompt.
 2. **Generates the entire file tree** atomically using structured JSON extraction.
-3. **Validates it via dry-run** against your local Docker daemon (`docker-compose config`).
-4. **Self-heals** by feeding Docker syntax errors back to the LLM for correction.
+3. **Live Sandbox Verification**: Boots the generated environment in a background temporary directory (`docker-compose up -d`), monitors it for 5 seconds to ensure no containers crash, and tears it down.
+4. **Autonomous Self-Healing**: If a container crashes on boot, the Critic agent extracts the real runtime `docker logs`, feeds the stack trace back to the LLM, and forces it to fix its own `Dockerfile` or `docker-compose.yml` code before finalizing.
 
 ## Stack
 - Python 3.11+

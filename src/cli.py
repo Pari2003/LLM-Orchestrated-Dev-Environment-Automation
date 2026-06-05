@@ -18,14 +18,15 @@ def generate(prompt):
     
     from src.agents.orchestrator import OrchestratorAgent
     
-    # We create a target directory based on the prompt or just use current dir.
-    # For now, let's create a folder named 'generated_env'
     target_dir = "generated_env"
     
-    orchestrator = OrchestratorAgent()
-    config = orchestrator.run(prompt, target_dir)
+    with console.status("[bold green]Architect Agent designing architecture...[/bold green]", spinner="dots") as status:
+        orchestrator = OrchestratorAgent()
+        
+        status.update("[bold cyan]Orchestrator looping with Critic and Live Sandbox...[/bold cyan]")
+        config = orchestrator.run(prompt, target_dir)
     
-    console.print(f"[green]Done! Environment is ready in '{target_dir}'.[/green]")
+    console.print(f"[bold green]✅ Done! Environment is ready and verified in '{target_dir}'.[/bold green]")
     console.print("[yellow]Post-create instructions:[/yellow]")
     console.print(config.post_create_instructions)
 

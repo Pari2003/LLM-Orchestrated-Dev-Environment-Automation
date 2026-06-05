@@ -12,12 +12,13 @@ class CriticAgent:
     """
     
     def evaluate(self, config: EnvironmentConfig) -> ValidationResult:
-        logger.info("CriticAgent: Evaluating generated configuration...")
+        logger.info("CriticAgent: Evaluating via Live Sandbox...")
         
-        # 1. Run strict syntax check using Docker toolchain
+        # 1. Run strict sandbox check using Docker toolchain
         result = DockerValidator.validate(config)
         
         if not result.is_valid:
+            logger.warning("CriticAgent: Sandbox failed. Returning crash logs to Generator.")
             return result
             
         # 2. Heuristic Checks (Rule-based)
